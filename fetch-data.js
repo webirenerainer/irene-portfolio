@@ -20,7 +20,7 @@ async function fetchData() {
         // 2. Fetch All Projects (Deep populate for both list and details)
         // Note: Using a large limit to get all projects
         console.log('Fetching Projects...');
-        const projectsRes = await fetch(`${STRAPI_URL}/api/projects?populate[thumbnail]=*&populate[content][populate]=*&sort=year:desc&pagination[pageSize]=100`, { headers });
+        const projectsRes = await fetch(`${STRAPI_URL}/api/projects?populate[thumbnail]=true&populate[content][populate]=*&sort=year:desc&pagination[pageSize]=100`, { headers });
         const projectsJson = await projectsRes.json();
 
         const fullData = {
