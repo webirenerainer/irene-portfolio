@@ -1,0 +1,27 @@
+{
+    "collectionName": "components_content_video_slides",
+    "info": {
+        "displayName": "Video Slide",
+        "icon": "play",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "video": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": [
+                "videos",
+                "files"
+            ]
+        },
+        "caption": {
+            "type": "text"
+        },
+        "vimeoUrl": {
+            "type": "string",
+            "required": false
+        }
+    }
+}

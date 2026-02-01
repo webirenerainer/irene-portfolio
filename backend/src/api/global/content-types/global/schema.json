@@ -1,0 +1,21 @@
+{
+    "kind": "singleType",
+    "collectionName": "globals",
+    "info": {
+        "singularName": "global",
+        "pluralName": "globals",
+        "displayName": "Global",
+        "description": "Site-wide settings"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "liveNews": {
+            "type": "component",
+            "repeatable": false,
+            "component": "global.live-news"
+        }
+    }
+}

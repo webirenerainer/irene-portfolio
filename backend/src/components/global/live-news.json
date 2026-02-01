@@ -1,0 +1,35 @@
+{
+    "collectionName": "components_global_live_news",
+    "info": {
+        "displayName": "Live News",
+        "icon": "earth",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "isActive": {
+            "type": "boolean",
+            "default": true
+        },
+        "label": {
+            "type": "string"
+        },
+        "link": {
+            "type": "string"
+        },
+        "target": {
+            "type": "enumeration",
+            "enum": [
+                "_self",
+                "_blank"
+            ],
+            "default": "_self"
+        },
+        "startDate": {
+            "type": "date"
+        },
+        "endDate": {
+            "type": "date"
+        }
+    }
+}

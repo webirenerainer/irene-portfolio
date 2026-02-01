@@ -1,0 +1,25 @@
+{
+    "kind": "singleType",
+    "collectionName": "about_pages",
+    "info": {
+        "singularName": "about-page",
+        "pluralName": "about-pages",
+        "displayName": "About Page",
+        "description": "Content for the About Me page"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "bio": {
+            "type": "richtext"
+        },
+        "cv": {
+            "type": "dynamiczone",
+            "components": [
+                "shared.cv-section"
+            ]
+        }
+    }
+}

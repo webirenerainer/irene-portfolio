@@ -1,0 +1,20 @@
+{
+    "collectionName": "components_shared_cv_sections",
+    "info": {
+        "displayName": "CV Section",
+        "icon": "layer",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "heading": {
+            "type": "string",
+            "required": true
+        },
+        "entries": {
+            "type": "component",
+            "repeatable": true,
+            "component": "shared.cv-entry"
+        }
+    }
+}

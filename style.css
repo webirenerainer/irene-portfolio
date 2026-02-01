@@ -1,0 +1,1309 @@
+/* =========================================
+   1. Global Reset & Typography
+   ========================================= */
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+/* =========================================
+   2. Header & Live Indicator
+   ========================================= */
+h1 {
+    letter-spacing: 0.04rem;
+    position: fixed;
+    top: 2vh;
+    width: 100%;
+    text-align: center;
+    z-index: 200;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-weight: normal;
+    line-height: 1.15;
+    margin: 0;
+}
+
+h1 a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.live-exhibition-indicator {
+    position: fixed;
+    top: calc(2vh + clamp(1.5rem, 4vw, 2rem) + 0.5rem);
+    width: 100%;
+    display: none;
+    /* Hidden by default (JS toggles to flex) */
+    justify-content: center;
+    align-items: center;
+    /* Align dot with top of text block */
+    gap: 0.5rem;
+    z-index: 190;
+    pointer-events: none;
+    white-space: nowrap;
+    /* Force single line */
+    overflow: hidden;
+    /* Hide overflow */
+    max-width: 100%;
+    /* Ensure it truncates if needed */
+}
+
+/* Marquee Effect */
+.live-exhibition-indicator.marquee-active {
+    justify-content: flex-start;
+    /* Allow scroll from start */
+}
+
+.marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    will-change: transform;
+}
+
+.marquee-active .marquee-content {
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Assumes content is duplicated 1x for seamless loop */
+}
+
+.live-exhibition-indicator a {
+    text-decoration: none;
+    color: black;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    letter-spacing: 0.065rem;
+    pointer-events: auto;
+}
+
+.breathing-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #E0B0FF;
+    border-radius: 50%;
+    animation: breathing 6s infinite ease-in-out;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes breathing {
+    0% {
+        background-color: #E0B0FF;
+        box-shadow: 0 0 0 0 rgba(224, 176, 255, 0.8);
+    }
+
+    14% {
+        background-color: #FFD1DC;
+    }
+
+    28% {
+        background-color: #FFB347;
+    }
+
+    42% {
+        background-color: #FDFD96;
+        box-shadow: 0 0 5px 2px rgba(253, 253, 150, 0.5);
+    }
+
+    57% {
+        background-color: #77DD77;
+    }
+
+    71% {
+        background-color: #AEC6CF;
+    }
+
+    85% {
+        background-color: #B39EB5;
+    }
+
+    100% {
+        background-color: #E0B0FF;
+        box-shadow: 0 0 0 0 rgba(224, 176, 255, 0.25);
+    }
+}
+
+/* Breathing Text Animation for Live Heading */
+@keyframes breathing-text {
+    0% {
+        color: #E0B0FF;
+        text-shadow: 0 0 5px rgba(224, 176, 255, 0.8);
+    }
+
+    14% {
+        color: #FFD1DC;
+    }
+
+    28% {
+        color: #FFB347;
+    }
+
+    42% {
+        color: #FDFD96;
+        text-shadow: 0 0 10px rgba(253, 253, 150, 0.8);
+    }
+
+    57% {
+        color: #77DD77;
+    }
+
+    71% {
+        color: #AEC6CF;
+    }
+
+    85% {
+        color: #B39EB5;
+    }
+
+    100% {
+        color: #E0B0FF;
+        text-shadow: 0 0 5px rgba(224, 176, 255, 0.25);
+    }
+}
+
+#live-news-target .cv-title {
+    animation: breathing-text 6s infinite ease-in-out;
+}
+
+/* =========================================
+   3. Navigation
+   ========================================= */
+.nav-wrapper {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 2vh;
+    padding-top: 4rem;
+    width: 100%;
+    text-align: center;
+    color: black;
+    z-index: 200;
+    pointer-events: none;
+}
+
+.nav-wrapper::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.85) 20%, rgba(255, 255, 255, 0) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    mask-image: linear-gradient(to top, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
+}
+
+.nav-wrapper ul {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2rem;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    pointer-events: auto;
+}
+
+.nav-wrapper ul li a {
+    text-decoration: none;
+    color: black;
+    transition: transform .3s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+    display: inline-block;
+}
+
+.project-detail-page .nav-wrapper ul {
+    justify-content: space-between;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   4. Index / Project Gallery
+   ========================================= */
+.container-projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 46.75dvh;
+    gap: 2rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+    justify-items: center;
+    align-items: center;
+    transition: opacity 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+    transition: opacity 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.project img {
+    width: 12.5vw;
+    max-height: 25vh;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.project video {
+    width: 12.5vw;
+    max-height: 25vh;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.project iframe {
+    width: 12.5vw;
+    aspect-ratio: 16/9;
+    height: auto;
+    display: block;
+    border: none;
+    pointer-events: auto;
+    transition: transform 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.project h3 {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    letter-spacing: .065rem;
+    font-weight: normal;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00), transform 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.project h3 span {
+    font-style: italic;
+}
+
+/* Mobile Active State */
+.container-projects:not(.list-view) .project.mobile-active img {
+    transform: none;
+}
+
+.container-projects:not(.list-view) .project.mobile-active h3 {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.3s;
+}
+
+/* List View styles */
+.container-projects.list-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    background: white;
+    overflow-y: auto;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    grid-template-columns: none;
+    grid-template-rows: none;
+}
+
+.container-projects.list-view::before,
+.container-projects.list-view::after {
+    content: '';
+    flex-grow: 1;
+    min-height: 2rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+
+    .container-projects.list-view::before,
+    .container-projects.list-view::after {
+        min-height: calc(50vh - 1.2rem);
+        scroll-snap-align: center;
+    }
+
+    .container-projects.list-view {
+        gap: 1.5rem;
+        scroll-snap-type: y mandatory;
+    }
+
+    .container-projects.list-view .project {
+        margin: 1rem 0;
+        scroll-snap-align: center;
+        transition: margin 0.3s ease, padding 0.3s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+    }
+
+    .container-projects.list-view .project.mobile-active {
+        margin: 4rem 0;
+    }
+}
+
+.container-projects.list-view .project {
+    min-height: 0;
+    height: auto;
+    flex-direction: row;
+    margin: 0;
+    justify-content: center;
+    padding: 0.35rem 0;
+    width: auto;
+    transition: padding 0.3s cubic-bezier(0.86, 0.00, 0.07, 1.00)
+}
+
+
+
+.container-projects.list-view .project img,
+.container-projects.list-view .project video,
+.container-projects.list-view .project iframe {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    max-height: none;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease-out;
+    margin: 0;
+}
+
+.container-projects.switching .project img,
+.container-projects.switching .project video {
+    transition: none;
+}
+
+.container-projects.list-view .project img.show-image,
+.container-projects.list-view .project video.show-image,
+.container-projects.list-view .project iframe.show-image {
+    opacity: .15;
+}
+
+.container-projects.list-view .project h3 {
+    z-index: 10;
+    font-size: 1rem;
+    margin: 0;
+    opacity: 1;
+}
+
+a.project {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+/* =========================================
+   5. Project Detail Page
+   ========================================= */
+.project-container {
+    position: relative;
+    width: 100%;
+}
+
+.project-detail-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.project-title {
+    position: sticky;
+    top: 6%;
+    letter-spacing: .04rem;
+    margin-top: 46.5dvh;
+    margin-bottom: 5vh;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-weight: normal;
+    text-align: center;
+    z-index: 10;
+}
+
+.project-title span {
+    font-style: italic;
+}
+
+.project-info-content {
+    position: relative;
+    max-width: 100%;
+    text-align: left;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0;
+    padding-bottom: 10rem;
+    margin: 25rem 5rem 5rem 5rem;
+}
+
+.project-description,
+.project-material {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    line-height: 1.15;
+    padding: 0;
+}
+
+.project-description span,
+.project-material span,
+.project-thumbnails span {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    letter-spacing: .065rem;
+}
+
+.project-thumbnails {
+    margin-top: 2rem;
+}
+
+.thumbnail-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.thumbnail-grid {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.project-thumbnails img,
+.project-thumbnails video,
+.vimeo-thumb-placeholder {
+    height: 4rem;
+    width: auto;
+    cursor: pointer;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.vimeo-thumb-placeholder {
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    padding: 0 1rem;
+    aspect-ratio: 16/9;
+}
+
+.project-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 50dvh;
+}
+
+.project-images figure {
+    width: 80%;
+    margin: 0;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: visible;
+}
+
+.video-container {
+    padding: 0 5rem;
+    box-sizing: border-box;
+}
+
+.project-images img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.project-images figcaption {
+    display: none;
+}
+
+.project-images figure:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile Caption List - Default Hidden */
+.mobile-caption-list {
+    display: none;
+    padding: 0;
+    margin-top: 15rem;
+    list-style: none;
+}
+
+/* =========================================
+   6. About Page
+   ========================================= */
+.about-page .live-exhibition-indicator {
+    display: none;
+}
+
+/* ... (unchanged) ... */
+
+/* ... (skip to Default Caption List Styles) ... */
+/* Default (Desktop) Caption List Styles */
+.project-caption-list {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: column;
+    padding: 0;
+    margin-top: 5rem;
+    /* Space from thumbnails */
+    list-style: none;
+    opacity: 1;
+    /* Reset base */
+    transition: opacity 0.3s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+    max-width: none;
+    /* Reset width to full */
+    width: 100%;
+    gap: 1rem;
+}
+
+/* =========================================
+   6. About Page
+   ========================================= */
+.about-page .live-exhibition-indicator {
+    display: none;
+}
+
+.about-content {
+    text-align: left;
+    padding-top: 2vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+}
+
+.h1-spacer {
+    float: left;
+    width: calc(50vw - 1rem + var(--h1-half-width, 0px));
+    height: 2.3rem;
+    shape-outside: inset(0 0 0 0);
+    visibility: hidden;
+    margin-right: 0.525em
+}
+
+.about-text {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-weight: normal;
+    line-height: 1.15;
+    display: inline;
+}
+
+.cv-container {
+    margin-top: 30rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    line-height: 1.2;
+    padding-bottom: 4rem;
+}
+
+.cv-container:last-child {
+    margin-bottom: 0;
+}
+
+.cv-section {
+    margin-bottom: 30rem;
+    /* Spacing between sections */
+    position: relative;
+    /* For precise observing calculation if needed */
+}
+
+/* Ensure the last section doesn't have huge margin triggering observer? 
+   Actually margin-bottom pushes the next element down, 
+   but the observer box model includes margin? No, usually border-box. 
+   Default IntersectionObserver observes the border-box. 
+   So margin does NOT count towards intersection. 
+   WE ARE GOOD. 
+*/
+
+.cv-section:last-child {
+    margin-bottom: 0;
+}
+
+.cv-heading {
+    letter-spacing: .065rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 1.5rem;
+    font-weight: normal;
+    position: sticky;
+    top: 6%;
+    text-align: center;
+    width: 100%;
+}
+
+.cv-entry {
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 15vh;
+}
+
+#current-group-exhibition {
+    scroll-margin-top: 12vh;
+}
+
+.cv-year,
+.cv-title,
+.cv-info {
+    display: block;
+}
+
+.cv-year {
+    padding-left: 2rem;
+    margin-bottom: 0px;
+}
+
+.cv-title {
+    margin-bottom: 0px;
+}
+
+.cv-title:has(.breathing-dot) {
+    display: flex;
+    align-items: center;
+}
+
+.cv-info {
+    color: inherit;
+}
+
+.cv-visit-link {
+    display: block;
+    text-decoration: none;
+    width: fit-content;
+    color: inherit;
+    opacity: 0.25;
+    transition: opacity 0.3s cubic-bezier(0.86, 0.00, 0.07, 1.00), padding 0.3s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+.cv-visit-link svg {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+    margin-left: 0.25rem;
+}
+
+.cv-dot-spacer {
+    margin-right: 0.5rem;
+}
+
+/* =========================================
+   7. Footer
+   ========================================= */
+.footer-fullscreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.copyright {
+    margin-bottom: 0.5rem;
+    letter-spacing: .065rem;
+}
+
+.credits {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin: 0;
+    letter-spacing: .065rem;
+}
+
+.credits a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.25;
+    transition: opacity 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00), padding 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+/* =========================================
+   8. Media Queries (Mobile & Desktop overrides)
+   ========================================= */
+
+/* Desktop Only Interactions */
+@media (min-width: 769px) {
+
+    .project-detail-page .nav-wrapper::before,
+    .about-page .nav-wrapper::before {
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        mask-image: none;
+        -webkit-mask-image: none;
+    }
+
+    .nav-wrapper ul li a:hover {
+        transform: translateY(-5px);
+    }
+
+    .container-projects:has(.project:hover) .project:not(:hover) {
+        opacity: 0.25;
+    }
+
+    .container-projects:not(.list-view) .project:hover img,
+    .container-projects:not(.list-view) .project:hover video {
+        transform: translateY(-7%);
+    }
+
+    .container-projects:not(.list-view) .project:hover h3 {
+        opacity: 1;
+        transform: translateY(5px);
+    }
+
+    .container-projects.list-view .project:hover {
+        padding: 0.6rem 0;
+    }
+
+    .project-thumbnails img:hover,
+    .project-thumbnails video:hover,
+    .vimeo-thumb-placeholder:hover {
+        transform: translateY(-7%);
+    }
+
+    .credits a:hover {
+        opacity: 1;
+        padding: 0 0.25rem;
+    }
+
+    .cv-visit-link:hover {
+        opacity: 1;
+        padding: 0 0.25rem;
+    }
+
+    .cv-visit-link:hover svg {
+        transform: rotate(90deg);
+    }
+}
+
+/* Mobile Layouts */
+@media (max-width: 768px) {
+    body:not(.project-detail-page):not(.about-page) .nav-wrapper ul li:first-child {
+        display: none;
+    }
+
+    .container-projects {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 55vh;
+        padding-top: 20dvh;
+        padding-bottom: 20dvh;
+    }
+
+    .project img {
+        width: 60vw;
+        max-height: 35vh;
+    }
+
+    .project-images figure:first-child {
+        margin-top: 45dvh;
+    }
+
+    .project-images figure {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 10rem;
+        counter-increment: caption-count;
+        position: relative;
+    }
+
+    .project-images img,
+    .project-images iframe {
+        width: 100% !important;
+        height: auto;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+    }
+
+    .project-images figcaption {
+        display: none;
+    }
+
+    .video-container,
+    .video-container.vimeo-container {
+        padding: 0 1rem;
+    }
+
+    .project-images figure:has(figcaption)::after {
+        content: none;
+    }
+
+    .thumbnail-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .thumbnail-number {
+        position: static;
+        order: 1;
+        background-color: transparent;
+        color: black;
+        font-size: 0.8rem;
+        padding: 0;
+        display: block;
+        text-align: left;
+    }
+
+    .project-images {
+        counter-reset: caption-count;
+        margin-top: 2rem;
+    }
+
+    .project-info-content {
+        margin: 10rem 1rem 5rem 1rem;
+        padding-bottom: 5rem;
+        scroll-margin-top: 25vh;
+    }
+
+    /* Mobile: Captions are visible and full opacity */
+    .project-caption-list {
+        display: block;
+        opacity: 1;
+    }
+
+    .project-caption-list li {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .project-caption-list li span.caption-number {
+        min-width: 1.5rem;
+    }
+
+    .cv-container {
+        margin-top: 10rem;
+    }
+}
+
+/* Default (Desktop) Caption List Styles */
+@media (min-width: 769px) {
+    .project-caption-list {
+        display: grid;
+        grid-template-rows: repeat(3, auto);
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-flow: column;
+        padding: 0;
+        margin-top: 5rem;
+        /* Space from thumbnails */
+        list-style: none;
+        opacity: 1;
+        /* Reset base */
+        transition: opacity 0.3s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+        max-width: none;
+        /* Reset width to full */
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .project-caption-list li {
+        opacity: 0.25;
+        /* Default Desktop Items */
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        /* Same as mobile */
+        display: flex;
+        gap: 0.5rem;
+        color: black;
+        transition: opacity 0.3s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+    }
+
+    .project-caption-list li.caption-highlight {
+        opacity: 1;
+    }
+
+    .project-caption-list li span.caption-number {
+        min-width: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Mobile Override: Always 1 */
+    .project-caption-list li {
+        opacity: 1;
+    }
+}
+
+/* =========================================
+   9. Video & Controls
+   ========================================= */
+.project video,
+.video-container video {
+    width: 12.5vw;
+    /* Match project img width */
+    max-height: 25vh;
+    /* Match project img height */
+    height: auto;
+    object-fit: cover;
+    /* Cover or contain? Images are contain usually, but videos are fixed aspect ratio. Let's try cover or contain based on context */
+    object-fit: contain;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.86, 0.00, 0.07, 1.00);
+}
+
+/* Mobile video sizing overrides */
+@media (max-width: 768px) {
+
+    .project video,
+    .video-container video {
+        width: 60vw;
+        max-height: 35vh;
+    }
+}
+
+/* Detail Page specific video sizing */
+/* Detail Page specific video sizing */
+.project-images .video-container {
+    width: 100%;
+    height: 100vh;
+    /* Takes full viewport height */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center vertically */
+    align-items: center;
+    /* Center horizontally */
+    /* Center horizontally */
+    margin-top: calc(30vh - 2rem);
+    /* Subtract preceding figure's margin-bottom for visual equality */
+    margin-bottom: 30vh;
+    margin-left: 0;
+    margin-right: 0;
+    /* Significant isolation margins to ensure video is the only element visible */
+}
+
+@media (max-width: 768px) {
+    .project-images .video-container {
+        height: auto;
+        min-height: 50vh;
+        margin-top: calc(15vh - 2rem);
+        margin-bottom: 15vh;
+        margin-left: 0;
+        margin-right: 0;
+        /* Slightly less on mobile, but still isolated */
+    }
+
+    .project-images video {
+        width: 100%;
+        /* Full width on mobile as requested */
+    }
+}
+
+/* Fullscreen Styles */
+.video-container:fullscreen {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container:fullscreen video {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    object-fit: contain;
+}
+
+.video-container:fullscreen .video-controls {
+    bottom: 2rem;
+    left: 2rem;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.project-images video {
+    width: 64%;
+    /* Video itself stays at 64% as requested for desktop */
+    max-height: 80vh;
+    /* Don't overflow the container height too much if it's tall?
+                         Leave auto height, object-fit contain if needed. */
+    height: auto;
+    object-fit: contain;
+}
+
+/* Custom Controls */
+.video-controls {
+    position: relative;
+    /* Sit below the video in normal flow */
+    /* Remove absolute poisoning */
+    bottom: auto;
+    left: auto;
+    right: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 10;
+    opacity: 1;
+    /* Always visible */
+    transition: opacity 0.3s ease;
+    background: transparent;
+    /* Removed background for mix-blend-mode */
+    padding: 0.5rem;
+    padding-top: 1rem;
+    /* Add space between video and controls */
+    border-radius: 4px;
+    width: 64%;
+    /* Match video width */
+    /* Match video width */
+    /* Uses left/right positioning now */
+    color: black;
+}
+
+.video-controls button {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: .75rem;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.065rem;
+    min-width: 2rem;
+    text-align: left;
+    text-align: left;
+    color: black;
+}
+
+/* Custom styled range slider */
+.video-timeline {
+    width: auto;
+    flex-grow: 1;
+    /* Take up all available space */
+    cursor: pointer;
+    -webkit-appearance: none;
+    /* Remove default styling */
+    appearance: none;
+    background: transparent;
+    /* Track background handled below */
+    height: 10px;
+    /* Hit area height */
+    position: relative;
+    border: none;
+    /* margin: 0 1rem; */
+    /* Spacing */
+}
+
+/* Track: Thin black line */
+.video-timeline::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1px;
+    height: 1px;
+    background: black;
+    border: none;
+    cursor: pointer;
+}
+
+.video-timeline::-moz-range-track {
+    width: 100%;
+    height: 1px;
+    height: 1px;
+    background: black;
+    border: none;
+    cursor: pointer;
+}
+
+/* Thumb: Vertical thin line (dragger) */
+.video-timeline::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    height: 10px;
+    background: black;
+    cursor: pointer;
+    margin-top: -4.5px;
+    /* Center thumb on track: height(10)/2 - track(1)/2 = 4.5 */
+    border: none;
+    border-radius: 0;
+}
+
+.video-timeline::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    width: 10px;
+    height: 10px;
+    background: black;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+}
+
+/* Fullscreen button push to right if container is full width,
+   but on desktop it's auto width.
+   User wants "full is on the very right".
+   If width is auto, right is just end of flex.
+   If width is 100% (mobile), margin-left: auto works.
+*/
+.fullscreen-btn {
+    margin-left: 0;
+    /* Let flex gap handle it, or margin if needed.
+                     User said: "timeline indicator should take up the space from the unmute until the full screen button"
+                     So timeline gets flex-grow: 1. Button margin not needed. */
+}
+
+.video-container:hover .video-controls {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+
+    /* Always show controls on mobile & adjust layout */
+    .video-controls {
+        opacity: 1;
+        width: 100%;
+        /* Ensure container width */
+        /* Ensure container width */
+        justify-content: flex-start;
+        /* Reset justify to allow margin-left: auto to work effectively */
+        gap: 1rem;
+        /* Minimal gap */
+        padding: 0.5rem;
+        padding-top: 2rem;
+        /* Requested gap */
+        padding-right: 0;
+        /* Align icon flush to right (minus its own spacing if any) */
+        box-sizing: border-box;
+        flex-wrap: nowrap;
+        /* Force single line as requested */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+    }
+
+    .video-controls button {
+        font-size: 1.15rem;
+        /* Explicitly requested size */
+        min-width: auto;
+        line-height: 1;
+        flex-shrink: 0;
+        /* Don't squash buttons */
+        display: flex;
+        /* alignment */
+        align-items: center;
+        /* alignment */
+        align-items: center;
+        color: black;
+    }
+
+    .video-timeline {
+        width: auto;
+        /* fixed small percentage */
+        flex: 1;
+        /* Grow to fill space */
+        min-width: 2rem;
+        /* Allow getting smaller if needed */
+        margin: 0 0.5rem;
+        /* Add spacing around timeline */
+    }
+
+    .video-duration {
+        font-size: .9rem;
+        /* Matches button size */
+        white-space: nowrap;
+        /* prevent break */
+        flex-shrink: 0;
+        margin-right: 0.5rem;
+    }
+}
+
+/* Mobile: Always visible or on tap?
+   Let's keep hover dependent on desktop, maybe always visible on mobile?
+   For now, strictly follow default desktop behavior first.
+*/
+
+.video-controls button {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1.15rem;
+    cursor: pointer;
+    /* text-transform: uppercase; */
+    padding: 0;
+    letter-spacing: 0.065rem;
+    min-width: 2rem;
+    /* prevent jump */
+    text-align: left;
+}
+
+.video-timeline {
+    width: 10rem;
+    cursor: pointer;
+}
+
+.video-duration {
+    font-size: 1.15rem;
+    font-variant-numeric: tabular-nums;
+}
+
+
+
+/* Hide custom controls in fullscreen */
+.video-container:fullscreen .video-controls,
+.video-container:-webkit-full-screen .video-controls {
+    display: none;
+}
+
+/* Fixed CV Heading (Sticky Center) */
+#fixed-cv-heading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    letter-spacing: 0.04rem;
+    pointer-events: none;
+    z-index: 150;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    text-align: center;
+    width: 100%;
+}
+
+#fixed-cv-heading.visible {
+    opacity: 1;
+}
+
+/* Hide original headings but keep them in DOM for accessibility/structure */
+.cv-heading {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+}

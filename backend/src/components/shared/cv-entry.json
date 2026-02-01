@@ -1,0 +1,50 @@
+{
+    "collectionName": "components_shared_cv_entries",
+    "info": {
+        "displayName": "CV Entry",
+        "icon": "bulletList",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "year": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "info": {
+            "type": "text"
+        },
+        "details": {
+            "type": "richtext"
+        },
+        "isLive": {
+            "type": "boolean",
+            "default": false
+        },
+        "liveLabel": {
+            "type": "string"
+        },
+        "liveStartDate": {
+            "type": "date"
+        },
+        "liveEndDate": {
+            "type": "date"
+        },
+        "linkText": {
+            "type": "string"
+        },
+        "linkUrl": {
+            "type": "string"
+        },
+        "linkTarget": {
+            "type": "enumeration",
+            "enum": [
+                "_blank",
+                "_self"
+            ],
+            "default": "_blank"
+        }
+    }
+}
