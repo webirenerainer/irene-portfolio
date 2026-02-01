@@ -1,0 +1,10 @@
+{
+    "name": "irene-portfolio-frontend",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "node fetch-data.js && mkdir -p dist && cp index.html style.css script.js project-detail.html about.html data.json dist/ && cp -r assets dist/"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
