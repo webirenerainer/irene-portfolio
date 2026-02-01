@@ -158,6 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.innerHTML = html;
         attachProjectListeners();
+
+        // Restore Scroll Position if returning from detail page (and list view isn't active/fixed)
+        // Actually list view is fixed, but the main grid is standard flow.
+        const savedScroll = sessionStorage.getItem('scrollPosition');
+        if (savedScroll) {
+            // fast restore
+            window.scrollTo(0, parseInt(savedScroll, 10));
+            sessionStorage.removeItem('scrollPosition');
+        }
     }
 
     async function loadProjectDetail(appData) {
@@ -565,6 +574,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectsContainer = document.querySelector('.container-projects');
 
         projects.forEach(project => {
+            // Save scroll position on click
+            project.addEventListener('click', () => {
+                sessionStorage.setItem('scrollPosition', window.scrollY);
+            });
+
             project.addEventListener('mouseenter', () => {
                 if (projectsContainer && projectsContainer.classList.contains('list-view')) {
                     const img = project.querySelector('img');
