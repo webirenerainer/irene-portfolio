@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Prevent browser from auto-restoring scroll (we handle it manually)
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
 
     /* =========================================
        0. Data Strategy (Static vs API)
@@ -159,13 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = html;
         attachProjectListeners();
 
-        // Restore Scroll Position if returning from detail page (and list view isn't active/fixed)
-        // Actually list view is fixed, but the main grid is standard flow.
+        // Restore Scroll Position if returning from detail page
         const savedScroll = sessionStorage.getItem('scrollPosition');
         if (savedScroll) {
-            // fast restore
-            window.scrollTo(0, parseInt(savedScroll, 10));
-            sessionStorage.removeItem('scrollPosition');
+            // Slight delay to ensure layout and widths are calculated
+            setTimeout(() => {
+                window.scrollTo(0, parseInt(savedScroll, 10));
+                sessionStorage.removeItem('scrollPosition');
+            }, 10);
         }
     }
 

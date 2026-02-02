@@ -839,12 +839,18 @@ a.project {
         position: relative;
     }
 
-    .project-images img,
+    .project-images img {
+        width: 100% !important;
+        height: auto;
+        aspect-ratio: auto !important;
+        object-fit: contain;
+    }
+
     .project-images iframe {
         width: 100% !important;
         height: auto;
-        /* aspect-ratio: 16/9; Removed to keep original ratio */
-        object-fit: contain;
+        aspect-ratio: 16/9;
+        object-fit: cover;
     }
 
     .project-images figcaption {
