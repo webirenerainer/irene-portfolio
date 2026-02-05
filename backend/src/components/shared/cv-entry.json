@@ -16,9 +16,6 @@
         "info": {
             "type": "text"
         },
-        "location": {
-            "type": "string"
-        },
         "details": {
             "type": "richtext"
         },
